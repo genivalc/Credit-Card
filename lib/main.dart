@@ -1,6 +1,8 @@
+import 'package:CreditCard/controllers/page_controller.dart';
 import 'package:CreditCard/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider(create: (BuildContext context) => PageControllerApp(),
+      child: HomePage()),
     );
   }
 }

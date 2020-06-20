@@ -8,7 +8,7 @@ class PanelTop extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 12),
         child: Container(
-          height: 150,
+          height: MediaQuery.of(context).size.height / 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -26,14 +26,14 @@ class PanelTop extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 25,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Balance",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blueGrey)),
                                 SizedBox(
-                height: 10,
+                height: MediaQuery.of(context).size.height * 0.01,
               ),
                   Text("\$234",
                       style:
