@@ -12,8 +12,13 @@ class MyAppBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(icon: Icon(Icons.arrow_back), onPressed: () {}),
-         Consumer<PageControllerApp>(
+            IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Provider.of<PageControllerApp>(context, listen: false)
+                      .setCurrentIndex(-1);
+                }),
+            Consumer<PageControllerApp>(
               builder: (context, value, child) {
                 return AnimatedOpacity(
                     duration: Duration(milliseconds: 300),
@@ -21,7 +26,7 @@ class MyAppBar extends StatelessWidget {
                     child: child);
               },
               child: IconButton(
-                      icon: Icon(Icons.check_circle_outline), onPressed: () {}),
+                  icon: Icon(Icons.check_circle_outline), onPressed: () {}),
             ),
           ],
         ),
