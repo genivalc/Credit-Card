@@ -8,7 +8,7 @@ class PanelTop extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 12),
         child: Container(
-          height: MediaQuery.of(context).size.height / 4,
+          height: MediaQuery.of(context).size.height * 0.3,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

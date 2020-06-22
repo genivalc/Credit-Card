@@ -1,4 +1,6 @@
+import 'package:CreditCard/controllers/page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatelessWidget {
   @override
@@ -11,10 +13,15 @@ class MyAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(icon: Icon(Icons.arrow_back), onPressed: () {}),
-            Opacity(
-              opacity: 1,
+         Consumer<PageControllerApp>(
+              builder: (context, value, child) {
+                return AnimatedOpacity(
+                    duration: Duration(milliseconds: 300),
+                    opacity: value.currentIndex != -1 ? 1 : 0,
+                    child: child);
+              },
               child: IconButton(
-                  icon: Icon(Icons.check_circle_outline), onPressed: () {}),
+                      icon: Icon(Icons.check_circle_outline), onPressed: () {}),
             ),
           ],
         ),
