@@ -11,6 +11,7 @@ class ItemPage extends StatelessWidget {
   final String numberCard;
   final String name;
   final String imageURL;
+  final String operadoraURL;
   final MultiTrackTween multiTrackTween = MultiTrackTween([
     Track('rotate')
         .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: -0.5)),
@@ -24,7 +25,7 @@ class ItemPage extends StatelessWidget {
 
   final MultiTrackTween animacaoCard = MultiTrackTween([
     Track('rotate')
-        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: -1.57)),
+        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 1.57)),
     Track('top').add(Duration(milliseconds: 300), Tween(begin: 0.20, end: 0.12),
         curve: Curves.easeInCubic),
     Track('scale').add(Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.7),
@@ -37,6 +38,7 @@ class ItemPage extends StatelessWidget {
       this.index,
       this.numberCard,
       this.name,
+      this.operadoraURL,
       this.imageURL})
       : super(key: key);
 
@@ -58,6 +60,7 @@ class ItemPage extends StatelessWidget {
       child: Consumer<PageControllerApp>(
         child: FlippableBox(
           front: FrontCard(
+            operadoraURL: operadoraURL,
             imageURL: imageURL,
             color: color,
           ),
@@ -119,7 +122,8 @@ class ItemPage extends StatelessWidget {
                                   child: Opacity(
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          right: animation['padding_right']),
+                                          right: 0 //animation['padding_right']
+                                          ),
                                       child: child,
                                     ),
                                     opacity: animation['opacity'],
@@ -146,20 +150,100 @@ class ItemPage extends StatelessWidget {
 class FrontCard extends Container {
   final String imageURL;
   final Color color;
+  final String operadoraURL;
 
-  FrontCard({Key key, this.imageURL, this.color});
+  FrontCard({Key key, this.imageURL, this.color, this.operadoraURL});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: RotatedBox(
-          quarterTurns: 1,
-          child: Image.network(
-            imageURL,
-            fit: BoxFit.cover,
-          ),
+        child: Stack(
+          alignment: Alignment.center,
+          fit: StackFit.expand,
+          children: [
+            RotatedBox(
+              quarterTurns: 1,
+              child: Image.network(
+                imageURL,
+                fit: BoxFit.cover,
+              ),
+            ),
+            RotatedBox(
+              quarterTurns: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Cartão de Crédito",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                        Image.network(
+                          "https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png",
+                          width: 45,
+                          height: 45,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                    ),
+                    Row(
+                      children: [
+                        Image.network(
+                            "https://img.icons8.com/cotton/2x/sim-card-chip--v1.png",
+                            width: 70,
+                            height: 70),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.08,
+                        ),
+                        Text(
+                          "1111 2222 3333 4444",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "TITULAR DO CARTÂO",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            Text(
+                              "Genival Neto",
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        Image.network(
+                          operadoraURL,
+                          width: 45,
+                          height: 45,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -178,18 +262,95 @@ class BackCard extends Container {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 60, left: 60),
+      child: RotatedBox(
+        quarterTurns: 3,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, bottom: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                color: Colors.black38,
+                height: 60,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 40),
                 child: Container(
-            color: Colors.black38,
-            width: 70,
+                  color: Colors.white,
+                  height: 60,
+                  width: 150,
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "2263 212",
+                          style:
+                              TextStyle(color: Colors.redAccent, fontSize: 21),
+                        ),
+                      )),
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.height * 0.07,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.08,
+                  ),
+                  Text(
+                    "1111 2222 3333 4444",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: color,
+                        shadows: [
+                          Shadow(color: Colors.black38, offset: Offset(0, 9))
+                        ]),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "",
+                        style: TextStyle(),
+                      ),
+                      Text(
+                        "",
+                        style: TextStyle(),
+                      ),
+                    ],
+                  ),
+                  // Image.network(
+                  //   operadoraURL,
+                  //   width: 45,
+                  //   height: 45,
+                  // )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Text(
+                  "Fale com a gente: 0800 7227-9933",
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+            ],
           ),
-              )),
-        ],
+        ),
       ),
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(boxShadow: [

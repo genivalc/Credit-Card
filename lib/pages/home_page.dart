@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               builder: (context, notifier, child) => Container(
                 margin: EdgeInsets.only(top: 60),
                 height: MediaQuery.of(context).size.height - 60,
-                              child: PageView(
+                child: PageView(
                   physics:
                       Provider.of<PageControllerApp>(context, listen: false)
                                   .currentIndex !=
@@ -65,22 +65,26 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     ItemPage(
                       index: 0,
-                       color: Colors.pink,
-                       
+                      color: Colors.pink,
                       imageURL:
                           'https://us.123rf.com/450wm/grebeshkovmaxim/grebeshkovmaxim1805/grebeshkovmaxim180500202/100769321-colorful-smooth-gradient-color-background-design-for-your-project-design-.jpg?ver=6',
+                      operadoraURL:
+                          'https://logodownload.org/wp-content/uploads/2016/10/visa-logo.png',
                     ),
                     ItemPage(
                       index: 1,
                       color: Colors.lightBlue,
                       imageURL:
                           'https://ak5.picdn.net/shutterstock/videos/1018020805/thumb/1.jpg',
+                      operadoraURL: 'https://carnesparaguassu.com.br/wp-content/uploads/2017/12/logo-diners-club-novo-1.png',
                     ),
                     ItemPage(
                       index: 2,
                       color: Colors.grey[800],
                       imageURL:
                           'https://i.pinimg.com/736x/5c/ee/af/5ceeafdc811d2269821fb03df29374ff.jpg',
+                      operadoraURL:
+                          'https://1000marcas.net/wp-content/uploads/2019/12/MasterCard-Logo.png',
                     )
                   ],
                 ),
