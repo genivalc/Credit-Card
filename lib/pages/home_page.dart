@@ -6,6 +6,7 @@ import 'package:CreditCard/widgets/item_page.dart';
 import 'package:CreditCard/widgets/panel_top_two.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,15 +16,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController(viewportFraction: 0.8);
   @override
+  void initState() {
+    super.initState();
+    Provider.of<PageControllerApp>(context, listen: false).hideSheet();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Provider.of<PageControllerApp>(context, listen: false).hideSheet();
     return Scaffold(
       body: SafeArea(
         child: Stack(
           alignment: Alignment.topCenter,
           children: <Widget>[
             MyAppBar(),
-PanelTopTwo(),
-         PanelTop(),
+            PanelTopTwo(),
+            PanelTop(),
             Consumer<PageControllerApp>(
               builder: (context, notifier, child) => Container(
                 margin: EdgeInsets.only(top: 60),
@@ -34,7 +42,7 @@ PanelTopTwo(),
                                   .currentIndex !=
                               -1
                           ? NeverScrollableScrollPhysics()
-                          : BouncingScrollPhysics(),
+                          : ClampingScrollPhysics(),
                   onPageChanged: (index) {
                     Provider.of<PageControllerApp>(context, listen: false)
                         .setPageIndex(index);
@@ -54,7 +62,8 @@ PanelTopTwo(),
                       color: Colors.lightBlue,
                       imageURL:
                           'https://ak5.picdn.net/shutterstock/videos/1018020805/thumb/1.jpg',
-                      operadoraURL: 'https://carnesparaguassu.com.br/wp-content/uploads/2017/12/logo-diners-club-novo-1.png',
+                      operadoraURL:
+                          'https://carnesparaguassu.com.br/wp-content/uploads/2017/12/logo-diners-club-novo-1.png',
                     ),
                     ItemPage(
                       index: 2,
@@ -67,6 +76,45 @@ PanelTopTwo(),
                   ],
                 ),
               ),
+            ),
+            Consumer<PageControllerApp>(
+              builder: (context, value, child) {
+                bool isHide = Provider.of<PageControllerApp>(context, listen: false).isHide;
+                return AnimatedOpacity(
+                  duration: Duration(milliseconds: 300),
+                  opacity: isHide ? 0 : 1,
+                                  child: SlidingSheet( 
+                    elevation: 8,
+                    cornerRadius: 16,
+                    listener: (state){
+                       Provider.of<PageControllerApp>(context, listen: false)
+                            .setState(state);
+                      Provider.of<PageControllerApp>(context, listen: false)
+                            .setProgress(state.progress);
+                    },
+                    color: ThemeData.dark().primaryColor,
+                    controller:
+                        Provider.of<PageControllerApp>(context, listen: false)
+                            .sheetController,
+
+                    snapSpec:  SnapSpec(
+                      snap: true,
+                      snappings: [0.2, 0.6, 0.92],
+                      positioning: SnapPositioning.relativeToAvailableSpace,
+                    ),
+                    builder: (context, state) {
+                      return Material(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          child: Center(
+                            child: Text('This is the content of the sheet'),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

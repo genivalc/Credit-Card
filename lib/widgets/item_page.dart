@@ -20,16 +20,19 @@ class ItemPage extends StatelessWidget {
     Track('opacity')
         .add(Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.0)),
     Track('padding_right')
-        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 20))
+        .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 20)),
   ]);
 
   final MultiTrackTween animacaoCard = MultiTrackTween([
     Track('rotate')
         .add(Duration(milliseconds: 300), Tween(begin: 0.0, end: 1.57)),
-    Track('top').add(Duration(milliseconds: 300), Tween(begin: 0.20, end: 0.12),
+    Track('top').add(Duration(milliseconds: 300), Tween(begin: 0.20, end: 0.05),
         curve: Curves.easeInCubic),
     Track('scale').add(Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.7),
-        curve: Curves.easeInCubic)
+        curve: Curves.easeInCubic),
+    Track('new_scale').add(
+        Duration(milliseconds: 300), Tween(begin: 1.0, end: 0.0),
+        curve: Curves.easeInCubic),
   ]);
 
   ItemPage(
@@ -45,16 +48,18 @@ class ItemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         int currentIndex =
             Provider.of<PageControllerApp>(context, listen: false).currentIndex;
         if (currentIndex != -1) {
-          Provider.of<PageControllerApp>(context, listen: false).setIsFlipped(
+          Provider.of<PageControllerApp>(context, listen: false).setisFlipped(
               !Provider.of<PageControllerApp>(context, listen: false)
                   .isFlipped);
         } else {
           Provider.of<PageControllerApp>(context, listen: false)
               .setCurrentIndex(index);
+          await Provider.of<PageControllerApp>(context, listen: false)
+              .showSheet();
         }
       },
       child: Consumer<PageControllerApp>(
@@ -75,6 +80,12 @@ class ItemPage extends StatelessWidget {
           int currentIndex =
               Provider.of<PageControllerApp>(context, listen: false)
                   .currentIndex;
+
+          double progress =
+              Provider.of<PageControllerApp>(context, listen: false).progress;
+
+          double spec =
+              Provider.of<PageControllerApp>(context, listen: false).spec;
 
           bool hideCard;
           if (currentIndex != -1) {
@@ -101,8 +112,9 @@ class ItemPage extends StatelessWidget {
                       : Playback.PLAY_REVERSE,
                   builder: (context, animation) {
                     return Positioned(
-                      top:
-                          MediaQuery.of(context).size.height * animation['top'],
+                      top: MediaQuery.of(context).size.height *
+                              animation['top'] -
+                          progress * 230,
                       height: MediaQuery.of(context).size.height * 0.55,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: Transform.rotate(
@@ -122,8 +134,8 @@ class ItemPage extends StatelessWidget {
                                   child: Opacity(
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          right: 0 //animation['padding_right']
-                                          ),
+                                          right:
+                                              0 /*animation['padding_right']*/),
                                       child: child,
                                     ),
                                     opacity: animation['opacity'],
@@ -184,15 +196,15 @@ class FrontCard extends Container {
                         Text(
                           "Cartão de Crédito",
                           style: TextStyle(
-                              fontSize: 25 +
-                                  MediaQuery.of(context).size.width * 0.0025,
-                              fontWeight: FontWeight.bold),
-                        ),
+                                   fontSize: 25 +
+                                    MediaQuery.of(context).size.width * 0.0025,
+                                fontWeight: FontWeight.bold)),
+                        
                         Image.network(
-                          "https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png",
+                          'https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png',
                           width: MediaQuery.of(context).size.height * 0.045,
                           height: MediaQuery.of(context).size.height * 0.045,
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -282,7 +294,7 @@ class BackCard extends Container {
             children: [
               Container(
                 color: Colors.black38,
-                height: MediaQuery.of(context).size.height * 0.090,
+              height: MediaQuery.of(context).size.height * 0.060,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
@@ -292,8 +304,8 @@ class BackCard extends Container {
                     right: MediaQuery.of(context).size.width * 0.080),
                 child: Container(
                   color: Colors.white,
-                  height:  MediaQuery.of(context).size.height * 0.07,
-                  width:  MediaQuery.of(context).size.width * 0.50,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.50,
                   child: Align(
                       alignment: Alignment.centerRight,
                       child: Padding(

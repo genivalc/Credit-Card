@@ -7,10 +7,12 @@ class PanelTopTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<PageControllerApp>(
       builder: (context, notifier, child) {
+                double spec = Provider.of<PageControllerApp>(context, listen: false)
+                  .spec;
         return AnimatedOpacity(
               duration: Duration(milliseconds: 400),
           curve: Curves.easeInCubic,
-          opacity: notifier.currentIndex != -1 ? 1 : 0,
+                  opacity: notifier.currentIndex == -1 || spec >= 0.6 ? 0 : 1,
           child: Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Padding(

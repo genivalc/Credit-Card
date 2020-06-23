@@ -14,9 +14,11 @@ class MyAppBar extends StatelessWidget {
           children: [
             IconButton(
                 icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Provider.of<PageControllerApp>(context, listen: false)
-                      .setCurrentIndex(-1);
+                    onPressed: () async {
+                Provider.of<PageControllerApp>(context, listen: false)
+                    .setCurrentIndex(-1);
+                await Provider.of<PageControllerApp>(context, listen: false)
+                    .hideSheet();
                 }),
             Consumer<PageControllerApp>(
               builder: (context, value, child) {
