@@ -88,7 +88,7 @@ class ItemPage extends StatelessWidget {
           }
 
           return AnimatedOpacity(
-            duration: Duration(milliseconds: !hideCard ? 2000 : 10),
+            duration: Duration(milliseconds: 10),
             opacity: hideCard ? 0 : 1,
             child: Stack(
               alignment: Alignment.center,
@@ -184,12 +184,14 @@ class FrontCard extends Container {
                         Text(
                           "Cartão de Crédito",
                           style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
+                              fontSize: 25 +
+                                  MediaQuery.of(context).size.width * 0.0025,
+                              fontWeight: FontWeight.bold),
                         ),
                         Image.network(
                           "https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png",
-                          width: 45,
-                          height: 45,
+                          width: MediaQuery.of(context).size.height * 0.045,
+                          height: MediaQuery.of(context).size.height * 0.045,
                         )
                       ],
                     ),
@@ -200,15 +202,17 @@ class FrontCard extends Container {
                       children: [
                         Image.network(
                             "https://img.icons8.com/cotton/2x/sim-card-chip--v1.png",
-                            width: 70,
-                            height: 70),
+                            width: MediaQuery.of(context).size.height * 0.070,
+                            height: MediaQuery.of(context).size.height * 0.070),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.08,
                         ),
                         Text(
                           "1111 2222 3333 4444",
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                              fontSize: 16 +
+                                  MediaQuery.of(context).size.width * 0.0025,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -223,12 +227,18 @@ class FrontCard extends Container {
                           children: [
                             Text(
                               "TITULAR DO CARTÂO",
-                              style: TextStyle(fontSize: 12),
+                              style: TextStyle(
+                                  fontSize: 12 +
+                                      MediaQuery.of(context).size.width *
+                                          0.0025),
                             ),
                             Text(
                               "Genival Neto",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 18 +
+                                      MediaQuery.of(context).size.width *
+                                          0.0025,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -272,46 +282,50 @@ class BackCard extends Container {
             children: [
               Container(
                 color: Colors.black38,
-                height: 60,
+                height: MediaQuery.of(context).size.height * 0.090,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 40),
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width * 0.080),
                 child: Container(
                   color: Colors.white,
-                  height: 60,
-                  width: 150,
+                  height:  MediaQuery.of(context).size.height * 0.07,
+                  width:  MediaQuery.of(context).size.width * 0.50,
                   child: Align(
                       alignment: Alignment.centerRight,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.080),
                         child: Text(
                           "2263 212",
-                          style:
-                              TextStyle(color: Colors.redAccent, fontSize: 21),
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 21 +
+                                  MediaQuery.of(context).size.width * 0.0025),
                         ),
                       )),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.height * 0.07,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.08,
-                  ),
-                  Text(
-                    "1111 2222 3333 4444",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: color,
-                        shadows: [
-                          Shadow(color: Colors.black38, offset: Offset(0, 9))
-                        ]),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.070),
+                    child: Text(
+                      "1111 2222 3333 4444",
+                      style: TextStyle(
+                          fontSize:
+                              22 + MediaQuery.of(context).size.width * 0.0025,
+                          fontWeight: FontWeight.bold,
+                          color: color.withOpacity(0.8),
+                          shadows: [
+                            Shadow(color: Colors.black38, offset: Offset(0, 2))
+                          ]),
+                    ),
                   ),
                 ],
               ),
@@ -334,18 +348,15 @@ class BackCard extends Container {
                       ),
                     ],
                   ),
-                  // Image.network(
-                  //   operadoraURL,
-                  //   width: 45,
-                  //   height: 45,
-                  // )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Text(
                   "Fale com a gente: 0800 7227-9933",
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(
+                      fontSize:
+                          14 + MediaQuery.of(context).size.width * 0.0010),
                 ),
               ),
             ],

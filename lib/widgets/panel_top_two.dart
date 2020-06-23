@@ -8,6 +8,8 @@ class PanelTopTwo extends StatelessWidget {
     return Consumer<PageControllerApp>(
       builder: (context, notifier, child) {
         return AnimatedOpacity(
+              duration: Duration(milliseconds: 400),
+          curve: Curves.easeInCubic,
           opacity: notifier.currentIndex != -1 ? 1 : 0,
           child: Padding(
             padding: const EdgeInsets.only(top: 60),
@@ -44,7 +46,6 @@ class PanelTopTwo extends StatelessWidget {
               ),
             ),
           ),
-          duration: Duration(milliseconds: 300),
         );
       },
     );

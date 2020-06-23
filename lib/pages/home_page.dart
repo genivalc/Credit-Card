@@ -22,30 +22,8 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.topCenter,
           children: <Widget>[
             MyAppBar(),
-            Consumer<PageControllerApp>(
-                builder: (context, notifier, child) {
-                  return AnimatedPadding(
-                    duration: Duration(milliseconds: 300),
-                    padding: EdgeInsets.only(
-                      top: notifier.currentIndex != -1 ? 0 : 20,
-                    ),
-                    child: AnimatedOpacity(
-                      opacity: notifier.currentIndex != -1 ? 1 : 0,
-                      child: child,
-                      duration: Duration(milliseconds: 300),
-                    ),
-                  );
-                },
-                child: PanelTopTwo()),
-            Consumer<PageControllerApp>(
-                builder: (context, notifier, child) {
-                  return AnimatedOpacity(
-                    child: child,
-                    opacity: notifier.currentIndex != -1 ? 0 : 1,
-                    duration: Duration(milliseconds: 300),
-                  );
-                },
-                child: PanelTop()),
+PanelTopTwo(),
+         PanelTop(),
             Consumer<PageControllerApp>(
               builder: (context, notifier, child) => Container(
                 margin: EdgeInsets.only(top: 60),
@@ -56,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                                   .currentIndex !=
                               -1
                           ? NeverScrollableScrollPhysics()
-                          : ClampingScrollPhysics(),
+                          : BouncingScrollPhysics(),
                   onPageChanged: (index) {
                     Provider.of<PageControllerApp>(context, listen: false)
                         .setPageIndex(index);

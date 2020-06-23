@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
       title: 'Credit Card',
       theme: ThemeData(
         brightness: Brightness.dark,
+        primarySwatch: Colors.purple,
+        primaryColor: Colors.purple,
       ),
       home: ChangeNotifierProvider(create: (BuildContext context) => PageControllerApp(),
       child: HomePage()),
