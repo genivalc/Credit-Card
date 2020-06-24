@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
-     SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
-     );
+    SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
+  );
   runApp(MyApp());
 }
 
@@ -18,11 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Credit Card',
-  theme: ThemeData.dark(),
-  
-      home: ChangeNotifierProvider( create: (_) => PageControllerApp() ,
-      
-      child: HomePage()),
+      theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.black,
+          scaffoldBackgroundColor: Colors.grey[900]),
+      home: ChangeNotifierProvider(
+          create: (_) => PageControllerApp(), child: HomePage()),
     );
   }
 }

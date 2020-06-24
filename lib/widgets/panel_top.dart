@@ -17,7 +17,8 @@ class PanelTop extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 60),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.12),
         child: Padding(
           padding: const EdgeInsets.only(left: 24, right: 24, top: 12),
           child: Container(
@@ -30,8 +31,10 @@ class PanelTop extends StatelessWidget {
                   children: [
                     Text(
                       'Cartões Bancários',
-                      style:
-                          TextStyle(fontSize: 25 + MediaQuery.of(context).size.width * 0.010, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize:
+                              25 + MediaQuery.of(context).size.width * 0.010,
+                          fontWeight: FontWeight.bold),
                     ),
                     CircleAvatar(
                       backgroundImage: NetworkImage(
@@ -47,7 +50,8 @@ class PanelTop extends StatelessWidget {
                   children: [
                     Text("Saldo",
                         style: TextStyle(
-                            fontSize: 16 + MediaQuery.of(context).size.width * 0.001,
+                            fontSize:
+                                16 + MediaQuery.of(context).size.width * 0.001,
                             fontWeight: FontWeight.bold,
                             color: Colors.blueGrey)),
                     SizedBox(
@@ -55,7 +59,9 @@ class PanelTop extends StatelessWidget {
                     ),
                     Text("R\$234",
                         style: TextStyle(
-                            fontSize: 32 + MediaQuery.of(context).size.width * 0.001, fontWeight: FontWeight.bold)),
+                            fontSize:
+                                32 + MediaQuery.of(context).size.width * 0.001,
+                            fontWeight: FontWeight.bold)),
                   ],
                 )
               ],

@@ -65,8 +65,8 @@ class PageControllerApp extends ChangeNotifier {
   }
 
   showSheet() async {
-    _isHide = false;  
+    _isHide = false;
     await _sheetController.show();
-    notifyListeners(); 
+    notifyListeners();
   }
 }

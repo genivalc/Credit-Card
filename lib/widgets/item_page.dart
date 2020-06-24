@@ -84,9 +84,6 @@ class ItemPage extends StatelessWidget {
           double progress =
               Provider.of<PageControllerApp>(context, listen: false).progress;
 
-          double spec =
-              Provider.of<PageControllerApp>(context, listen: false).spec;
-
           bool hideCard;
           if (currentIndex != -1) {
             if (index == currentIndex) {
@@ -114,13 +111,14 @@ class ItemPage extends StatelessWidget {
                     return Positioned(
                       top: MediaQuery.of(context).size.height *
                               animation['top'] -
-                          progress * 230,
+                          progress * MediaQuery.of(context).size.height * 0.42 +
+                          MediaQuery.of(context).padding.top,
                       height: MediaQuery.of(context).size.height * 0.55,
                       width: MediaQuery.of(context).size.width * 0.80,
                       child: Transform.rotate(
                         angle: animation['rotate'],
                         child: Transform.scale(
-                          scale: animation['scale'],
+                          scale: animation['scale'] - (progress * 0.8),
                           child: ControlledAnimation(
                             tween: multiTrackTween,
                             duration: multiTrackTween.duration,
@@ -193,13 +191,11 @@ class FrontCard extends Container {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Cartão de Crédito",
-                          style: TextStyle(
-                                   fontSize: 25 +
+                        Text("Cartão de Crédito",
+                            style: TextStyle(
+                                fontSize: 25 +
                                     MediaQuery.of(context).size.width * 0.0025,
                                 fontWeight: FontWeight.bold)),
-                        
                         Image.network(
                           'https://i.ya-webdesign.com/images/white-wifi-logo-png-6.png',
                           width: MediaQuery.of(context).size.height * 0.045,
@@ -294,7 +290,7 @@ class BackCard extends Container {
             children: [
               Container(
                 color: Colors.black38,
-              height: MediaQuery.of(context).size.height * 0.060,
+                height: MediaQuery.of(context).size.height * 0.060,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
